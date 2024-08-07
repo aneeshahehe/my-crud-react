@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 500vw;
+  max-width: 100%;
+  justify-content: space-between;
+
 }
 
 .App-logo {
@@ -35,4 +41,50 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.Input-item
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    background-color: rgb(200, 177, 177);
+    
+    padding: 20px 28px;
+    
+    font-weight: 600;
+    color: #4b313c;
+    width: 100%;
+    justify-content: space-between;
+    
+  
+}
+
+.btn
+{
+  color: #f0e5e2;
+  background-color: #791e35be;
+  margin: 7px;
+}
+
+.Input-data
+{
+  font-size: 19px;
+  width: 80vw;
+  padding-left: 20px;
+  padding-bottom: 5px;
+  align-items: center;
+  border: 0.5px solid ;
+  border-color: #3d0d0db7;
+  margin: 10px 28px;
+  
+
+}
+
+
+.Input-item::placeholder
+{
+  width: 1000vw;
+  padding: 10px 15px;
 }
