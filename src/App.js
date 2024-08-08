@@ -1,7 +1,8 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import './App.css';
 import {Data} from './Data';
+// import { Calendar } from 'primereact/calendar';
 
 function App() {
   const [data, setData] = useState([]);
@@ -9,7 +10,7 @@ function App() {
   const [id, setId] =useState(0);
   const [name, setName] =useState('');
   const [email, setEmail] =useState('');
-  const [phone, setPhone] =useState();
+  const [phone, setPhone] =useState('');
 
   //keep a flag for changing update and save button
 
@@ -49,36 +50,41 @@ function App() {
 
     const handleSave = (e) =>
       {
+        
         //form validation
 
-        let error = ' ';
-        if (name === ' ')
-          error += 'Name is a required field';
+        let error = '';
+        if (name === '')
+          error += 'Name is a required field. ';
 
-        if (email === ' ')
-          error += 'E-mail is a required field';
+        if (email === '')
+          error += 'E-mail is a required field. ';
 
-        if (phone === ' ')
-          error += 'Phone is a required field';
+        if (phone === '')
+          error += 'Phone is a required field. ';
 
-        if(error !== ' ')
+        if(error === '')
         {
         //current object with which we are binding our data is data (line 7)
         //we will put a new event object in our 'data' -> e
-        e.preventDefault(); //other events are restricted
+        e.preventDefault(); 
+        //other events are restricted
         const dt = [...data]; //take the final existing object/data/records after deleting and adding etc into dt
         //create a new object
         //this states get added to the new data we input
-        const newObject = {
-          id : data.length + 1,
+        const newObject = 
+        {
+        id : Data.length + 1,
         name : name,
         email : email,
-        phone : phone, //initial states
+        phone : phone //initial states
         }
+
         //we now push the latest/new object into dt array
         dt.push(newObject);
         //update our state
         setData(dt);
+        console.log('Updated Data:', dt);
       }
 
       else
@@ -126,7 +132,7 @@ function App() {
         <div>
           <label>
             E-mail:
-            <input className='Input-data' type='text' placeholder='enter your email'  onChange={(e) => setEmail(e.target.value)} value={email}/>
+            <input className='Input-data' type='text' placeholder='enter your e-mail'  onChange={(e) => setEmail(e.target.value)} value={email}/>
           </label>
         </div>
 
