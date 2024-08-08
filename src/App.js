@@ -6,14 +6,14 @@ import {Data} from './Data';
 function App() {
   const [data, setData] = useState([]);
   //creating states for our fields
-  const [id, setId] =useState(0)
-  const [name, setName] =useState('')
-  const [email, setEmail] =useState('')
-  const [phone, setPhone] =useState()
+  const [id, setId] =useState(0);
+  const [name, setName] =useState('');
+  const [email, setEmail] =useState('');
+  const [phone, setPhone] =useState();
 
   //keep a flag for changing update and save button
 
-  const [isUpdate, setIsUpdate] =useState(false)
+  const [isUpdate, setIsUpdate] =useState(false);
 
 
 
