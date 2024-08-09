@@ -13,6 +13,7 @@ function App() {
   const [email, setEmail] =useState('');
   const [phone, setPhone] =useState('');
   const [date, setDate] = useState('');
+  const [gender, setGender] = useState('');
 
   const [values, setValues] =useState({
     name: '',
@@ -107,6 +108,7 @@ function App() {
         name : name,
         email : email,
         phone : phone,
+        gender : gender,
         date : date //initial states
         }
 
@@ -135,6 +137,7 @@ function App() {
           dt[index].name = name;
           dt[index].email = email;
           dt[index].date = date;
+          dt[index].gender = gender;
           dt[index].phone = phone;
           dt[index].date = date;
 
@@ -148,6 +151,7 @@ function App() {
         setEmail('');
         setPhone('');
         setDate('');
+        setGender('');
         setIsUpdate(false);
       }
 
@@ -190,6 +194,26 @@ function App() {
         </div>
 
         <div>
+    <label>
+      Gender:
+      <div>
+        <label>
+          <input type="radio" value="Male" checked={gender === 'Male'} onChange={(e) => setGender(e.target.value)} />
+          Male
+        </label>
+        <label>
+          <input type="radio" value="Female" checked={gender === 'Female'} onChange={(e) => setGender(e.target.value)} />
+          Female
+        </label>
+        <label>
+          <input type="radio" value="Other" checked={gender === 'Other'} onChange={(e) => setGender(e.target.value)} />
+          Other
+        </label>
+      </div>
+    </label>
+  </div>
+
+        <div>
 
           {
             !isUpdate ?
@@ -214,6 +238,7 @@ function App() {
             <td>Id</td>
             <td>Name</td>
             <td>Birthday</td>
+            <td>Gender</td>
             <td>E-mail</td>
             <td>Phone</td>
             <td>Actions</td>
@@ -247,6 +272,7 @@ function App() {
                     <td>{item.id}</td>
                     <td>{item.name}</td>
                     <td>{item.date}</td>
+                    <td>{item.gender}</td>
                     <td>{item.email}</td>
                     <td>{item.phone}</td>
                     <td>
