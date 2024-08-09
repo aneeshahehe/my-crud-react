@@ -12,12 +12,13 @@ function App() {
   const [name, setName] =useState('');
   const [email, setEmail] =useState('');
   const [phone, setPhone] =useState('');
+  const [date, setDate] = useState('');
 
   const [values, setValues] =useState({
     name: '',
     email:'',
     phone:'',
-    birthday:'',
+    date:'',
     password:'',
     confirmPassword:''
   })
@@ -42,8 +43,7 @@ function App() {
 
 
   //to bind dummy data from Data.js to the data array
-  useEffect(()=>{
-    setData(Data)
+  useEffect(()=>{setData(Data)
   },[]);
 
   //event handlers
@@ -58,6 +58,7 @@ function App() {
       setName(dt[0].name);
       setEmail(dt[0].email);
       setPhone(dt[0].phone);
+      setDate(dt[0].date);
     }
   }
   const handleDelete = (id) =>
@@ -88,6 +89,9 @@ function App() {
           // error += 'Phone is a required field. ';
           return;
 
+        if (date === '')
+          return;
+
         if(error === '')
         {
         //current object with which we are binding our data is data (line 7)
@@ -99,10 +103,11 @@ function App() {
         //this states get added to the new data we input
         const newObject = 
         {
-        id : Data.length + 1,
+        id : data.length + 1,
         name : name,
         email : email,
-        phone : phone //initial states
+        phone : phone,
+        date : date //initial states
         }
 
         //we now push the latest/new object into dt array
@@ -129,7 +134,9 @@ function App() {
           const dt = [...data]; //we take the stored Data to dt though spread
           dt[index].name = name;
           dt[index].email = email;
+          dt[index].date = date;
           dt[index].phone = phone;
+          dt[index].date = date;
 
           setData(dt);
           handleClear();
@@ -140,6 +147,7 @@ function App() {
         setName('');
         setEmail('');
         setPhone('');
+        setDate('');
         setIsUpdate(false);
       }
 
@@ -161,7 +169,7 @@ function App() {
         <div>
           <label>
             E-mail:
-            <input className='Input-data' type='text' placeholder='enter your e-mail'  onChange={(e) => setEmail(e.target.value)} value={email}/>
+            <input className='Input-data' type='email' placeholder='enter your e-mail'  onChange={(e) => setEmail(e.target.value)} value={email}/>
             {errors.email && <p style={{color:"red"}}>{errors.email} </p>}
           </label>
         </div>
@@ -171,6 +179,13 @@ function App() {
             Phone:
             <input className='Input-data' type='text' placeholder='enter your phone number'  onChange={(e) => setPhone(e.target.value)} value={phone}/>
             {errors.phone && <p style={{color:"red"}}>{errors.phone} </p>}
+          </label>
+        </div>
+
+        <div>
+          <label>
+            Birthday: 
+            <input className='Input-data' type='date' placeholder='birthday' onChange={(e) => setDate(e.target.value)} value={date} />
           </label>
         </div>
 
@@ -198,20 +213,40 @@ function App() {
             <td>Sr. No</td>
             <td>Id</td>
             <td>Name</td>
-            <td>email</td>
+            <td>Birthday</td>
+            <td>E-mail</td>
             <td>Phone</td>
             <td>Actions</td>
+            
           </tr>
           </thead> 
           <tbody>
             {
               data.map((item,index)=>
               {
+                let formattedDate = item.date;
+
+                try {
+                  const parsedDate = new Date(item.date);
+                  if (!isNaN(parsedDate)) {
+                    formattedDate = new Intl.DateTimeFormat('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: '2-digit',
+                    }).format(parsedDate);
+                  } else {
+                    console.error(`Invalid Date: ${item.date}`);
+                  }
+                } catch (error) {
+                  console.error(`Error parsing date: ${item.date}`, error);
+                }
+          
                 return(
                   <tr key={index}>
                     <td>{index+1}</td>
                     <td>{item.id}</td>
                     <td>{item.name}</td>
+                    <td>{item.date}</td>
                     <td>{item.email}</td>
                     <td>{item.phone}</td>
                     <td>
