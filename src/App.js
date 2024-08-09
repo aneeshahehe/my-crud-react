@@ -193,10 +193,10 @@ function App() {
           </label>
         </div>
 
-        <div>
+    <div className='radio-data'>
     <label>
       Gender:
-      <div>
+      <div >
         <label>
           <input type="radio" value="Male" checked={gender === 'Male'} onChange={(e) => setGender(e.target.value)} />
           Male
@@ -225,7 +225,7 @@ function App() {
           }
         
         
-        <button className='btn btn-danger'onClick={() =>handleClear()}>Clear</button>
+          <button className='btn btn-danger'onClick={() =>handleClear()}>Clear</button>
         </div>
       </form>
 
