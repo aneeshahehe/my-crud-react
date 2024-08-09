@@ -2,6 +2,7 @@
 import React, { Component, useEffect, useState } from 'react';
 import './App.css';
 import {Data} from './Data';
+import {Validation} from './Validation';
 // import { Calendar } from 'primereact/calendar';
 
 function App() {
@@ -12,11 +13,32 @@ function App() {
   const [email, setEmail] =useState('');
   const [phone, setPhone] =useState('');
 
+  const [values, setValues] =useState({
+    name: '',
+    email:'',
+    phone:'',
+    birthday:'',
+    password:'',
+    confirmPassword:''
+  })
+
   //keep a flag for changing update and save button
 
   const [isUpdate, setIsUpdate] =useState(false);
 
+  const [errors, setErrors] = useState({}); 
 
+  // function handleInput(e)
+  // {
+  //   const newObj = {...toHaveFormValues, [e.target.name]: e.target.value}
+  //   setValues(newObj)
+  // }
+
+  function handleValidation(e)
+  {
+    e.preventDefault();
+    setErrors(Validation(values));
+  }
 
 
   //to bind dummy data from Data.js to the data array
@@ -55,13 +77,16 @@ function App() {
 
         let error = '';
         if (name === '')
-          error += 'Name is a required field. ';
+          // 
+          return;
 
         if (email === '')
-          error += 'E-mail is a required field. ';
+          // error += 'E-mail is a required field. ';
+          return;
 
         if (phone === '')
-          error += 'Phone is a required field. ';
+          // error += 'Phone is a required field. ';
+          return;
 
         if(error === '')
         {
@@ -118,14 +143,18 @@ function App() {
         setIsUpdate(false);
       }
 
+  
   return (
     <div className='App'>
-
-      <div className='Input-item'>
+      
+      <form className='Input-item' onSubmit={handleValidation}>
         <div>
           <label>
             Name:
-            <input className='Input-data' type='text' placeholder='enter your name' onChange={(e) => setName(e.target.value)} value={name}/>
+            <input className='Input-data' type='text' placeholder='enter your name' onChange={(e) => setName(e.target.value)} value={name}
+            />
+            <span>{errors.name && <p>{ errors.name} </p>}
+            </span>
           </label>
         </div>
 
@@ -133,6 +162,7 @@ function App() {
           <label>
             E-mail:
             <input className='Input-data' type='text' placeholder='enter your e-mail'  onChange={(e) => setEmail(e.target.value)} value={email}/>
+            {errors.email && <p style={{color:"red"}}>{errors.email} </p>}
           </label>
         </div>
 
@@ -140,6 +170,7 @@ function App() {
           <label>
             Phone:
             <input className='Input-data' type='text' placeholder='enter your phone number'  onChange={(e) => setPhone(e.target.value)} value={phone}/>
+            {errors.phone && <p style={{color:"red"}}>{errors.phone} </p>}
           </label>
         </div>
 
@@ -157,7 +188,7 @@ function App() {
         
         <button className='btn btn-danger'onClick={() =>handleClear()}>Clear</button>
         </div>
-      </div>
+      </form>
 
 
       <table className='table table-hover'> 
@@ -193,6 +224,7 @@ function App() {
             }
             </tbody> 
       </table> 
+      
     </div>
   );
 
