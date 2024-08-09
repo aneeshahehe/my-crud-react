@@ -113,13 +113,29 @@
 }
 
 .radio-data{
-  align-items: center;
-  justify-content:space-around;
-  width: 100%;
  
+ position:absolute;
+  display: flex;
+  flex-direction: row;
   
-  gap: 3rem;
   left: 10%;
 
   
+}
+.radio-elements {
+ 
+  align-items: left;
+ 
+  display: flex;
+  flex-direction: row;
+  
+}
+
+.radio-data label {
+  margin-right: 10px;
+   /* Adds space between each radio button label */
+}
+
+.radio-data input[type="radio"] {
+  margin-right: 12px; /* Adds space between the radio button and the label text */
 }

@@ -165,7 +165,7 @@ function App() {
             Name:
             <input className='Input-data' type='text' placeholder='enter your name' onChange={(e) => setName(e.target.value)} value={name}
             />
-            <span>{errors.name && <p>{ errors.name} </p>}
+            <span>{errors.name && <p style={{color:"red"}}>{ errors.name} </p>}
             </span>
           </label>
         </div>
@@ -193,25 +193,25 @@ function App() {
           </label>
         </div>
 
-    <div className='radio-data'>
-    <label>
-      Gender:
-      <div >
-        <label>
-          <input type="radio" value="Male" checked={gender === 'Male'} onChange={(e) => setGender(e.target.value)} />
-          Male
-        </label>
-        <label>
-          <input type="radio" value="Female" checked={gender === 'Female'} onChange={(e) => setGender(e.target.value)} />
-          Female
-        </label>
-        <label>
-          <input type="radio" value="Other" checked={gender === 'Other'} onChange={(e) => setGender(e.target.value)} />
-          Other
-        </label>
+        <div className='radio-elements' >
+          <label>
+            Gender:
+            <div className='radio-data' >
+              <label>
+                <input type="radio" value="Male" checked={gender === 'Male'} onChange={(e) => setGender(e.target.value)} />
+                Male
+              </label>
+              <label>
+                <input type="radio" value="Female" checked={gender === 'Female'} onChange={(e) => setGender(e.target.value)} />
+                Female
+              </label>
+              <label>
+                <input type="radio" value="Other" checked={gender === 'Other'} onChange={(e) => setGender(e.target.value)} />
+                Other
+              </label>
+            </div>
+          </label>
       </div>
-    </label>
-  </div>
 
         <div>
 
